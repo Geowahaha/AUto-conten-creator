@@ -6,6 +6,13 @@
 **Branch:** `main`
 
 ---
+ TODO for Next Agent
+
+1.Set up Google OAuth for YouTube upload
+2.Test upload to channel UCBzVnGxyuXvR_Uq8mV38egw
+3.Add scheduling/deployment
+
+4 commits, 24 files, fully tested, ready to hand off. 🚀
 
 ## 📋 What This Project Does
 
