@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+config/config.yaml
+*.env
+output/
+*.pickle
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+venv/
+.venv/
+env/

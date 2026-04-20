@@ -1,0 +1,46 @@
+openai:
+  api_key: "sk-your-openai-api-key"
+  model: "gpt-4o"
+  image_model: "dall-e-3"
+
+youtube:
+  client_id: "your-client-id"
+  client_secret: "your-client-secret"
+  channel_id: "your-channel-id"
+
+tts:
+  provider: "openai"
+  openai:
+    voice: "nova"
+    model: "tts-1-hd"
+
+trends:
+  sources: [reddit, google_trends, news]
+  reddit:
+    subreddits: [technology, science, worldnews, interestingasfuck, todayilearned]
+    user_agent: "AutoContentCreator/1.0"
+  google_trends:
+    geo: "US"
+
+content:
+  video_duration: 45
+  style: "informative"
+  language: "en"
+  max_scripts_per_run: 3
+  topics_blacklist: [politics, religion, controversial]
+
+video:
+  width: 1080
+  height: 1920
+  fps: 30
+  font_size: 48
+  font_color: "white"
+  scene_duration: 5
+
+upload:
+  auto_publish: true
+  privacy: "public"
+  category_id: "28"
+  default_tags: [shorts, ai, trending, facts]
+  schedule_hour: 10
+  schedule_hour2: 18
