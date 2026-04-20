@@ -17,11 +17,15 @@ class VoiceoverEngine:
         scenes = script.get("scenes", [])
         full_text = " ".join(s.get("text", "") for s in scenes if s.get("text"))
         if not full_text:
+            full_text = script.get("hook", "Check out this amazing content!")
+
         date_str = datetime.now().strftime("%Y-%m-%d")
         title = script.get("title", "untitled")
         safe_title = "".join(c for c in title[:30] if c.isalnum() or c in " _-").strip()
         audio_path = self.output_dir / f"{date_str}_{safe_title}.mp3"
+
         logger.info(f"Generating {self.provider} voiceover ({len(full_text)} chars)")
+
         if self.provider == "openai":
             return self._generate_openai(full_text, audio_path)
         elif self.provider == "elevenlabs":
@@ -34,7 +38,12 @@ class VoiceoverEngine:
             from openai import OpenAI
             client = OpenAI(api_key=self.config["openai"]["api_key"])
             tts = self.tts_config.get("openai", {})
-            response = client.audio.speech.create(model=tts.get("model", "tts-1-hd"), voice=tts.get("voice", "nova"), input=text, response_format="mp3")
+            response = client.audio.speech.create(
+                model=tts.get("model", "tts-1-hd"),
+                voice=tts.get("voice", "nova"),
+                input=text,
+                response_format="mp3",
+            )
             response.stream_to_file(str(output_path))
             logger.info(f"OpenAI TTS saved: {output_path}")
             return str(output_path)
@@ -47,7 +56,11 @@ class VoiceoverEngine:
             from elevenlabs import ElevenLabs
             el = self.tts_config.get("elevenlabs", {})
             client = ElevenLabs(api_key=el.get("api_key"))
-            audio_gen = client.text_to_speech.convert(voice_id=el.get("voice_id", "21m00Tcm4TlvDq8ikWAM"), text=text, model_id="eleven_multilingual_v2")
+            audio_gen = client.text_to_speech.convert(
+                voice_id=el.get("voice_id", "21m00Tcm4TlvDq8ikWAM"),
+                text=text,
+                model_id="eleven_multilingual_v2",
+            )
             with open(output_path, "wb") as f:
                 for chunk in audio_gen:
                     f.write(chunk)
