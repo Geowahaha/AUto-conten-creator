@@ -2,7 +2,8 @@ __pycache__/
 *.py[cod]
 config/config.yaml
 *.env
-output/
+output/*
+!output/**/.gitkeep
 *.pickle
 .vscode/
 .idea/
